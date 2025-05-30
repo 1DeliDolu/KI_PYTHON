@@ -1,110 +1,193 @@
-### Project Structure
+# Multi-Task AI Assistant
 
-```
-/AI_Project
-│
-├── /data
-│   ├── /documents
-│   │   ├── example.pdf
-│   │   ├── example.docx
-│   │   ├── example.txt
-│   │   └── example.md
-│   ├── /images
-│   │   └── example_image.jpg
-│   └── /videos
-│       └── example_video.mp4
-│
-├── /src
-│   ├── __init__.py
-│   ├── main.py
-│   ├── wiki_reader.py
-│   ├── document_reader.py
-│   ├── image_analyzer.py
-│   ├── video_analyzer.py
-│   ├── translator.py
-│   └── utils.py
-│
-├── /models
-│   ├── image_model.h5
-│   ├── video_model.h5
-│   └── translation_model.pkl
-│
-├── /notebooks
-│   └── exploratory_analysis.ipynb
-│
-├── /tests
-│   ├── test_wiki_reader.py
-│   ├── test_document_reader.py
-│   ├── test_image_analyzer.py
-│   ├── test_video_analyzer.py
-│   └── test_translator.py
-│
-├── /requirements
-│   ├── requirements.txt
-│   └── README.md
-│
-└── /#file:KI_Training
-    ├── training_data.csv
-    ├── model_training_script.py
-    └── evaluation_metrics.md
+Bu proje, çeşitli AI görevlerini gerçekleştirebilen çok işlevli bir asistan uygulamasıdır.
+
+## Özellikler
+
+- **Wikipedia Sorgusu**: Wikipedia'da arama yapma ve bilgi alma
+- **Belge Okuyucu**: PDF, DOCX, TXT, RTF formatlarındaki belgeleri okuma ve analiz etme
+- **Görsel Analizi**: Resimleri analiz etme, renk analizi, kenar tespiti, yüz tanıma
+- **Video Analizi**: Video dosyalarını analiz etme, hareket tespiti, sahne değişimi
+- **Çeviri**: Metinleri farklı diller arasında çevirme
+
+## Kurulum
+
+1. Repository'yi klonlayın:
+```bash
+git clone <repository-url>
+cd local-ai-assistant
 ```
 
-### Project Components
+2. Gerekli paketleri yükleyin:
+```bash
+pip install -r requirements.txt
+```
 
-1. **Data Directory**: 
-   - Contains subdirectories for documents, images, and videos that the AI will process.
+3. Gerekli dizinleri oluşturun:
+```bash
+mkdir -p data models temp
+```
 
-2. **Source Code Directory (`/src`)**:
-   - `main.py`: The entry point of the application that orchestrates the various functionalities.
-   - `wiki_reader.py`: A module to fetch and process data from Wikipedia using APIs like `wikipedia-api` or `wikipedia`.
-   - `document_reader.py`: A module to read and extract text from various document formats (PDF, DOCX, TXT, MD) using libraries like `PyPDF2`, `python-docx`, and `markdown`.
-   - `image_analyzer.py`: A module to analyze images using computer vision libraries like `OpenCV` or `PIL`.
-   - `video_analyzer.py`: A module to analyze video content using libraries like `OpenCV` or `moviepy`.
-   - `translator.py`: A module to handle translations between English, German, and Turkish using libraries like `googletrans` or `transformers`.
-   - `utils.py`: A utility module for common functions used across the project.
+## Kullanım
 
-3. **Models Directory**:
-   - Contains pre-trained models for image analysis, video analysis, and translation tasks.
+### Etkileşimli Mod
+```bash
+python main.py --interactive
+```
 
-4. **Notebooks Directory**:
-   - Contains Jupyter notebooks for exploratory data analysis and experimentation.
+### Komut Satırı Modu
 
-5. **Tests Directory**:
-   - Contains unit tests for each module to ensure functionality and reliability.
+**Wikipedia Sorgusu:**
+```bash
+python main.py --wikipedia "artificial intelligence"
+```
 
-6. **Requirements Directory**:
-   - `requirements.txt`: A file listing all the necessary Python packages and dependencies.
-   - `README.md`: A file providing an overview of the project, installation instructions, and usage guidelines.
+**Belge Okuma:**
+```bash
+python main.py --document "path/to/document.pdf"
+```
 
-7. **Training Directory (`/#file:KI_Training`)**:
-   - `training_data.csv`: A dataset for training models, if applicable.
-   - `model_training_script.py`: A script for training models on the provided data.
-   - `evaluation_metrics.md`: Documentation on how to evaluate model performance.
+**Görsel Analizi:**
+```bash
+python main.py --image "path/to/image.jpg"
+```
 
-### Roadmap for Implementation
+**Video Analizi:**
+```bash
+python main.py --video "path/to/video.mp4"
+```
 
-1. **Setup Environment**:
-   - Create a virtual environment and install necessary packages listed in `requirements.txt`.
+**Çeviri:**
+```bash
+python main.py --translate "Hello world" --target-lang tr
+```
 
-2. **Implement Core Functionalities**:
-   - Develop the modules in the `/src` directory one by one, starting with the `wiki_reader.py` and `document_reader.py`.
+## Proje Yapısı
 
-3. **Integrate Modules**:
-   - Use `main.py` to integrate all functionalities and create a user interface (CLI or GUI) for interaction.
+```
+Multi-Task-AI-Assistant/
+│
+├── main.py                      # Ana uygulama giriş noktası
+├── config.py                    # Konfigürasyon ayarları
+├── requirements.txt             # Bağımlılık listesi
+├── data/                        # Veri setleri için dizin
+├── models/                      # Önceden eğitilmiş modeller
+├── scripts/                     # Çeşitli işlevsellikler için scriptler
+│   ├── wikipedia_query.py       # Wikipedia sorgu scripti
+│   ├── document_reader.py       # Belge okuma scripti
+│   ├── image_analysis.py        # Görsel analiz scripti
+│   ├── video_analysis.py        # Video analiz scripti
+│   └── translator.py            # Çeviri scripti
+├── tests/                       # Birim testler
+└── notebooks/                   # Deneyim için Jupyter notebook'lar
+```
 
-4. **Testing**:
-   - Write unit tests for each module in the `/tests` directory and ensure all tests pass.
+## Desteklenen Formatlar
 
-5. **Model Training**:
-   - If applicable, use the scripts in the `/#file:KI_Training` directory to train models on the provided datasets.
+### Belgeler
+- PDF (.pdf)
+- Microsoft Word (.docx, .doc)
+- Plain Text (.txt)
+- Rich Text Format (.rtf)
 
-6. **Documentation**:
-   - Update the `README.md` and other documentation files to reflect the project structure and usage.
+### Görseller
+- JPEG (.jpg, .jpeg)
+- PNG (.png)
+- BMP (.bmp)
+- GIF (.gif)
+- TIFF (.tiff)
 
-7. **Deployment**:
-   - Package the application for local deployment or consider creating a Docker container for easier distribution.
+### Videolar
+- MP4 (.mp4)
+- AVI (.avi)
+- MOV (.mov)
+- MKV (.mkv)
+- WMV (.wmv)
+- FLV (.flv)
 
-8. **Future Enhancements**:
-   - Consider adding more features, such as a web interface, additional language support, or more advanced analysis capabilities.
+## Desteklenen Diller (Çeviri)
 
-By following this roadmap, you can create a comprehensive local AI project that performs a variety of tasks effectively.
+- Türkçe (tr)
+- İngilizce (en)
+- Almanca (de)
+- Fransızca (fr)
+- İspanyolca (es)
+- İtalyanca (it)
+- Rusça (ru)
+- Çince (zh)
+- Japonca (ja)
+- Korece (ko)
+- Arapça (ar)
+- Portekizce (pt)
+- Hollandaca (nl)
+- İsveççe (sv)
+- Danca (da)
+- Norveççe (no)
+- Lehçe (pl)
+- Çekçe (cs)
+- Macarca (hu)
+- Yunanca (el)
+- İbranca (he)
+- Hintçe (hi)
+- Tayca (th)
+- Vietnamca (vi)
+
+## Konfigürasyon
+
+Uygulama ayarları `config.py` dosyasında yapılandırılabilir:
+
+- Dosya boyutu sınırları
+- Desteklenen formatlar
+- API anahtarları (çevre değişkenleri olarak)
+- Model ayarları
+
+## Çevre Değişkenleri
+
+Aşağıdaki çevre değişkenlerini isteğe bağlı olarak ayarlayabilirsiniz:
+
+```bash
+export OPENAI_API_KEY="your-openai-api-key"
+export AZURE_TRANSLATOR_KEY="your-azure-translator-key"
+export AZURE_TRANSLATOR_REGION="your-azure-region"
+```
+
+## Geliştirme
+
+### Test Çalıştırma
+```bash
+pytest tests/
+```
+
+### Yeni Özellik Ekleme
+1. `scripts/` dizininde yeni modül oluşturun
+2. `main.py` dosyasında modülü import edin
+3. Gerekli menü seçeneklerini ekleyin
+4. Test yazın
+
+## Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır.
+
+## Katkıda Bulunma
+
+1. Fork edin
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
+4. Branch'i push edin (`git push origin feature/amazing-feature`)
+5. Pull Request oluşturun
+
+## Sorun Giderme
+
+### Yaygın Sorunlar
+
+1. **ModuleNotFoundError**: Tüm bağımlılıkların yüklü olduğundan emin olun
+2. **Dosya okuma hatası**: Dosya yollarının doğru olduğunu kontrol edin
+3. **Çeviri hatası**: İnternet bağlantınızı kontrol edin
+
+### Loglama
+
+Debug modunu etkinleştirmek için `config.py` dosyasında `DEBUG = True` yapın.
+
+## İletişim
+
+Sorularınız için issue açabilirsiniz.

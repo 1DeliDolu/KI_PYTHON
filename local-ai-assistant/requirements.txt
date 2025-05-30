@@ -1,40 +1,45 @@
-AI_Project/
-│
-├── README.md                     # Project overview and instructions
-├── requirements.txt              # Python dependencies
-│
-├── data/                         # Directory for storing datasets
-│   ├── images/                   # Image datasets
-│   ├── videos/                   # Video datasets
-│   └── documents/                # Document datasets (PDF, DOC, TXT, MD)
-│
-├── src/                          # Source code for the project
-│   ├── __init__.py               # Package initialization
-│   ├── main.py                   # Main entry point for the application
-│   ├── wiki_reader.py            # Module for reading data from Wikipedia
-│   ├── document_reader.py         # Module for reading documents (PDF, DOC, TXT, MD)
-│   ├── image_analyzer.py         # Module for analyzing images
-│   ├── video_analyzer.py         # Module for analyzing videos
-│   ├── translator.py             # Module for translating between languages
-│   └── utils.py                  # Utility functions
-│
-├── tests/                        # Unit tests for the project
-│   ├── test_wiki_reader.py       # Tests for Wikipedia reader
-│   ├── test_document_reader.py    # Tests for document reader
-│   ├── test_image_analyzer.py    # Tests for image analyzer
-│   ├── test_video_analyzer.py    # Tests for video analyzer
-│   └── test_translator.py        # Tests for translator
-│
-├── notebooks/                    # Jupyter notebooks for experimentation
-│   ├── wiki_exploration.ipynb    # Notebook for exploring Wikipedia data
-│   ├── document_analysis.ipynb    # Notebook for document analysis
-│   ├── image_analysis.ipynb      # Notebook for image analysis
-│   ├── video_analysis.ipynb      # Notebook for video analysis
-│   └── translation.ipynb         # Notebook for translation tasks
-│
-└── #file:KI_Training/            # Directory for training documents and resources
-    ├── wiki_data.md              # Documentation on using Wikipedia data
-    ├── document_formats.md        # Information on supported document formats
-    ├── image_analysis.md          # Guidelines for image analysis
-    ├── video_analysis.md          # Guidelines for video analysis
-    └── translation.md             # Guidelines for translation tasks
+# Core dependencies
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Wikipedia API
+wikipedia>=1.4.0
+
+# Document processing
+PyPDF2>=3.0.0
+python-docx>=0.8.11
+
+# Image processing
+Pillow>=10.0.0
+opencv-python>=4.8.0
+matplotlib>=3.7.0
+
+# Video processing
+moviepy>=1.0.3
+imageio>=2.31.0
+
+# Translation (using compatible versions)
+deep-translator>=1.11.4
+
+# Natural Language Processing
+nltk>=3.8.0
+textblob>=0.17.1
+
+# Data handling
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Configuration and utilities
+python-dotenv>=1.0.0
+tqdm>=4.65.0
+colorama>=0.4.6
+
+# Document encoding detection (compatible with googletrans)
+chardet>=3.0.0,<5.0.0
+
+# Machine Learning (optional - for advanced features)
+scikit-learn>=1.3.0
+
+# Testing
+pytest>=7.4.0
