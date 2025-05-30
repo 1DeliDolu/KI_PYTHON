@@ -1,0 +1,36 @@
+/AI_Project
+│
+├── /data
+│   ├── /documents          # Directory for storing documents (PDF, DOC, TXT, MD)
+│   ├── /images             # Directory for storing images for analysis
+│   ├── /videos             # Directory for storing videos for analysis
+│   └── /wikipedia_data     # Directory for storing Wikipedia data
+│
+├── /notebooks              # Jupyter notebooks for experimentation and prototyping
+│
+├── /src                    # Source code for the project
+│   ├── __init__.py
+│   ├── main.py             # Main entry point for the application
+│   ├── wiki_reader.py      # Module for reading data from Wikipedia
+│   ├── document_reader.py   # Module for reading documents (PDF, DOC, TXT, MD)
+│   ├── image_analyzer.py   # Module for analyzing images
+│   ├── video_analyzer.py    # Module for analyzing videos
+│   ├── translator.py        # Module for translating between languages
+│   └── utils.py            # Utility functions
+│
+├── /tests                  # Unit tests for the project
+│   ├── test_wiki_reader.py
+│   ├── test_document_reader.py
+│   ├── test_image_analyzer.py
+│   ├── test_video_analyzer.py
+│   └── test_translator.py
+│
+├── /requirements            # Directory for dependencies
+│   ├── requirements.txt     # List of required Python packages
+│   └── environment.yml      # Conda environment file (if using Conda)
+│
+├── /docs                   # Documentation for the project
+│   ├── README.md            # Project overview and setup instructions
+│   └── API.md              # API documentation for the modules
+│
+└── /#file:KI_Training      # Directory for training documents and resources

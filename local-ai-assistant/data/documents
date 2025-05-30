@@ -1,0 +1,37 @@
+Multi-Task AI Assistant/
+│
+├── README.md                     # Project overview and setup instructions
+├── requirements.txt              # List of dependencies
+│
+├── src/                          # Source code directory
+│   ├── __init__.py
+│   ├── main.py                   # Entry point for the application
+│   ├── wikipedia_handler.py      # Module for querying Wikipedia
+│   ├── document_reader.py        # Module for reading documents
+│   ├── image_analyzer.py         # Module for image analysis
+│   ├── video_analyzer.py         # Module for video analysis
+│   ├── translator.py             # Module for translation
+│   └── utils.py                  # Utility functions
+│
+├── data/                         # Directory for storing data files
+│   ├── sample_documents/         # Sample documents for testing
+│   ├── sample_images/            # Sample images for testing
+│   └── sample_videos/            # Sample videos for testing
+│
+├── tests/                        # Unit tests for the project
+│   ├── __init__.py
+│   ├── test_wikipedia.py         # Tests for Wikipedia querying
+│   ├── test_document_reader.py   # Tests for document reading
+│   ├── test_image_analyzer.py    # Tests for image analysis
+│   ├── test_video_analyzer.py    # Tests for video analysis
+│   └── test_translator.py        # Tests for translation
+│
+├── notebooks/                    # Jupyter notebooks for experimentation
+│   ├── exploration.ipynb         # Initial exploration of features
+│   └── model_training.ipynb      # Training models if necessary
+│
+└── #file:KI_Training/            # Directory for training documents and resources
+    ├── training_data/            # Training data for models
+    ├── model_descriptions.md      # Descriptions of models used
+    ├── API_documentation.md       # Documentation for any APIs used
+    └── additional_resources.md     # Additional resources and references
