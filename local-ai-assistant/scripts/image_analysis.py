@@ -6,11 +6,18 @@ Handles image processing and analysis using computer vision
 import os
 import logging
 from typing import Dict, List, Optional, Tuple
-import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 import sys
+
+# Try to import OpenCV, fallback if not available
+try:
+    import cv2
+    OPENCV_AVAILABLE = True
+except ImportError:
+    OPENCV_AVAILABLE = False
+    print("Warning: OpenCV not available. Some image analysis features will be limited.")
 
 # Add parent directory to path for importing config
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -41,7 +48,11 @@ class ImageAnalysis:
                     "analysis": {}
                 }
             
-            # Load image
+            if not OPENCV_AVAILABLE:
+                # Use PIL-only analysis
+                return self._analyze_with_pil(image_path)
+            
+            # Load image with OpenCV
             image = cv2.imread(image_path)
             if image is None:
                 return {
@@ -71,6 +82,53 @@ class ImageAnalysis:
             return {
                 "success": False,
                 "message": f"Error analyzing image: {str(e)}",
+                "analysis": {}
+            }
+    
+    def _analyze_with_pil(self, image_path: str) -> Dict:
+        """PIL-only image analysis for when OpenCV is not available"""
+        try:
+            with Image.open(image_path) as img:
+                # Basic info
+                width, height = img.size
+                mode = img.mode
+                
+                # Convert to RGB if needed
+                if mode != 'RGB':
+                    img = img.convert('RGB')
+                
+                # Get basic statistics
+                img_array = np.array(img)
+                
+                analysis_results = {
+                    "basic_info": {
+                        "dimensions": f"{width}x{height}",
+                        "width": width,
+                        "height": height,
+                        "mode": mode,
+                        "file_size_bytes": os.path.getsize(image_path),
+                        "file_size_mb": round(os.path.getsize(image_path) / (1024 * 1024), 2),
+                        "aspect_ratio": round(width / height, 2),
+                        "total_pixels": width * height
+                    },
+                    "color_analysis": {
+                        "mean_color_rgb": [int(np.mean(img_array[:,:,i])) for i in range(3)],
+                        "brightness": round(np.mean(img_array), 2),
+                        "note": "Limited analysis - OpenCV not available"
+                    },
+                    "opencv_status": "Not available - install OpenCV for full analysis"
+                }
+                
+                return {
+                    "success": True,
+                    "file_path": image_path,
+                    "analysis": analysis_results
+                }
+                
+        except Exception as e:
+            return {
+                "success": False,
+                "message": f"PIL analysis failed: {str(e)}",
                 "analysis": {}
             }
     
@@ -143,8 +201,7 @@ class ImageAnalysis:
             
             # Get the colors
             colors = kmeans.cluster_centers_
-            
-            # Convert to integers and return
+              # Convert to integers and return
             return [[int(c) for c in color] for color in colors]
             
         except ImportError:
@@ -166,13 +223,15 @@ class ImageAnalysis:
                 return "Warm (Red-ish)"
             else:
                 return "Neutral"
-                
         except Exception:
             return "Unknown"
     
     def _detect_edges(self, image: np.ndarray) -> Dict:
         """Detect edges in the image using Canny edge detection"""
         try:
+            if not OPENCV_AVAILABLE:
+                return {"error": "OpenCV not available for edge detection"}
+                
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             
             # Apply Canny edge detection
@@ -197,6 +256,9 @@ class ImageAnalysis:
     def _detect_faces(self, image: np.ndarray) -> Dict:
         """Detect faces in the image using Haar cascades"""
         try:
+            if not OPENCV_AVAILABLE:
+                return {"face_count": 0, "faces": [], "error": "OpenCV not available for face detection"}
+                
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             
             # Load face cascade classifier
